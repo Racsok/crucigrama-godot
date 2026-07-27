@@ -20,10 +20,10 @@ jobs:
           godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.7.1-stable/Godot_v4.7.1-stable_export_templates.tpz
           relative_project_path: ./
           archive_output: true
-          export_debug: true  # <--- AGREGA ESTA LÍNEA AQUÍ
+          export_debug: true
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Juego-Compilado
-          path: /github/workspace/build/**
+          name: Juego-Compilado-APK
+          path: /home/runner/.local/share/godot/builds/**
