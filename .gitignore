@@ -1,0 +1,18 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+cat << 'EOF' > .gitignore
+# Caché e importaciones de Godot 4
+.godot/
+*.translation
+
+# Archivos compilados locales
+build/
+bin/
+*.apk
+*.aab
+*.exe
+*.pck
+*.x86_64
+EOF

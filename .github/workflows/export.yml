@@ -1,0 +1,29 @@
+name: "Godot Cloud Build"
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Permite ejecutar la compilación manualmente cuando quieras desde la web
+
+jobs:
+  export_game:
+    runs-on: ubuntu-latest
+    name: Export Game
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Godot Export
+        uses: firebelley/godot-export@v6.0.0
+        with:
+          # Ajusta la versión según la que estés usando en tu PC
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.7.1/Godot_v4.7.1-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.7.1/Godot_v4.7.1-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Juego-Compilado
+          path: /github/workspace/build/**

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dqvgjxk35ftqq"]
+
+[ext_resource type="Texture2D" uid="uid://5cxufjt6n7fd" path="res://background1.png" id="1_x67dw"]
+[ext_resource type="Script" uid="uid://bby5apemdkglq" path="res://ecenas/buttonPlay.gd" id="2_4ie7b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ie7b"]
+bg_color = Color(0.699923, 0.5766724, 0.4284971, 1)
+corner_detail = 20
+
+[node name="Control_base" type="Control" unique_id=1938434882]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 223.0
+offset_top = 184.0
+offset_right = 1163.0
+offset_bottom = 1855.0
+
+[node name="TextureRect_fondo" type="TextureRect" parent="." unique_id=1059947584]
+layout_mode = 0
+offset_left = -223.0
+offset_top = -191.0
+offset_right = 327.41748
+offset_bottom = 777.0
+texture = ExtResource("1_x67dw")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="." unique_id=589295280]
+layout_mode = 0
+offset_left = -86.0
+offset_top = 502.0
+offset_right = 184.0
+offset_bottom = 598.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ie7b")
+text = "Jugar"
+script = ExtResource("2_4ie7b")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
