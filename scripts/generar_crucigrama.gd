@@ -169,7 +169,6 @@ func resolver(index: int = 0) -> bool:
 	return false
 
 func generar() -> bool:
-	# Corrección del Integer Division: cast explícito a float/int
 	var fila_centro = int(float(n) / 2.0)
 	colocar_palabra(semilla, fila_centro, 0, "H")
 	return resolver(0)
@@ -187,13 +186,10 @@ func imprimir_grilla():
 # 3. RENDERIZADO VISUAL EN EL GRIDCONTAINER
 # ==========================================
 
-
-
 func renderizar_crucigrama(matriz_crucigrama: Array):
-	add_theme_constant_override("h_separation", 2) # Espacio horizontal entre celdas
-	add_theme_constant_override("v_separation", 2) # Espacio vertical entre celdas
+	add_theme_constant_override("h_separation", 2)
+	add_theme_constant_override("v_separation", 2)
 	
-	# Limpiar celdas previas y el diccionario de posiciones
 	casillas_mapa.clear()
 	for child in get_children():
 		child.queue_free()
@@ -204,10 +200,8 @@ func renderizar_crucigrama(matriz_crucigrama: Array):
 	var filas = matriz_crucigrama.size()
 	var columnas = matriz_crucigrama[0].size()
 	
-	# Ajustar el número de columnas del propio GridContainer
 	self.columns = columnas
 
-	# Dibujar casilla por casilla
 	for r in range(filas):
 		for c in range(columnas):
 			var valor = matriz_crucigrama[r][c]
@@ -218,46 +212,35 @@ func renderizar_crucigrama(matriz_crucigrama: Array):
 				casilla.max_length = 1
 				casilla.alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_CENTER
 				
-				# --- CONFIGURACIÓN PARA EL REVELADO ---
-				casilla.text = "" # Inicialmente vacía para que el jugador la adivine
-				casilla.editable = false # Bloquea el teclado virtual/físico
-				casilla.focus_mode = Control.FOCUS_NONE # Evita que gane foco al tocarla
+				casilla.text = "" 
+				casilla.editable = false 
+				casilla.focus_mode = Control.FOCUS_NONE 
 				
-				# Guardamos la letra correcta como metadato por si la necesitas luego
 				casilla.set_meta("letra_correcta", valor)
-				
 				add_child(casilla)
-				
-				# Guardamos la casilla en el diccionario mapeada por su coordenada (Vector2i)
 				casillas_mapa[Vector2i(r, c)] = casilla
 			else:
-				# Bloque transparente para celdas vacías
 				var bloque_invisible = Control.new()
 				bloque_invisible.custom_minimum_size = CELL_SIZE
 				add_child(bloque_invisible)
 				
-	# Obliga al contenedor a reajustar su tamaño mínimo según sus hijos
+	# Recalcula el tamaño mínimo del GridContainer según sus celdas
 	reset_size()
 	
-	# Centra el GridContainer horizontalmente en la pantalla
-	position.x = (540 - size.x) / 2.0
-	# Obliga al contenedor a reajustar su tamaño mínimo según sus hijos
-	reset_size()
-	
-	# Centra el GridContainer horizontalmente en la pantalla (asumiendo resolución 540)
-	position.x = (540 - size.x) / 2.0
+	# CENTRADO ADAPTABLE A CUALQUIER PANTALLA
+	var tamaño_pantalla = get_viewport_rect().size
+	position.x = (tamaño_pantalla.x - size.x) / 2.0
+	position.y = 80.0 # Margen superior relativo a la pantalla
 
 # ==========================================
-# 4. PUNTO DE ENTRADA AL EJECUTAR
+# 4. MANEJO DE SEÑALES Y REVELADO
 # ==========================================
+
 func _on_palabra_trazada(palabra: String):
 	print("El jugador intentó la palabra: ", palabra)
-	
-	# Asumiendo que 'palabras_colocadas' es un Array de diccionarios o Structs 
-	# con la información de las palabras generadas en el crucigrama:
 	var palabra_encontrada = false
 	
-	for p in palabras_colocadas: # Ajusta 'palabras_colocadas' al nombre de tu variable/lista de palabras
+	for p in palabras_colocadas:
 		if p.palabra == palabra:
 			palabra_encontrada = true
 			revelar_palabra_en_grilla(p)
@@ -265,7 +248,7 @@ func _on_palabra_trazada(palabra: String):
 			break
 			
 	if not palabra_encontrada:
-		print("La palabra '", palabra, "' no está en el crucigrama o ya fue revelada.")
+		print("La palabra '", palabra, "' no está en el crucigrama o es incorrecta.")
 
 func revelar_palabra_en_grilla(info_palabra: Dictionary):
 	var r = info_palabra.r
@@ -274,19 +257,15 @@ func revelar_palabra_en_grilla(info_palabra: Dictionary):
 	
 	for i in range(info_palabra.palabra.length()):
 		var pos = Vector2i(r, c)
-		
 		if casillas_mapa.has(pos):
 			var casilla = casillas_mapa[pos] as LineEdit
-			# Revelamos la letra en la pantalla
 			casilla.text = info_palabra.palabra[i]
 			
-		# Avanzar posición según la orientación ("H" o "V")
 		if es_horizontal:
 			c += 1
 		else:
 			r += 1
-	
-	# y revelarla en el GridContainer si es correcta.
+
 func _ready():
 	var mi_diccionario_espanol = ["ROMA", "AMOR", "MAR", "RAMO", "MORA", "ORO", "ARMAR", "ARMADURA", "DURA", "RADA"]
 	var mis_frecuencias = {"ROMA": 5.0, "AMOR": 6.5, "MAR": 4.2}
@@ -301,7 +280,9 @@ func _ready():
 	else:
 		print("No se encontró solución completa, generando mejor intento.")
 		
-	imprimir_grilla()
+	#imprimir_grilla()
 	renderizar_crucigrama(grilla)
 	
-	$"../Rueda".palabra_enviada.connect(_on_palabra_trazada)
+	# Conexión con el nodo Rueda
+	if has_node("../Rueda"):
+		$"../Rueda".palabra_enviada.connect(_on_palabra_trazada)

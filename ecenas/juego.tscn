@@ -22,11 +22,17 @@ script = ExtResource("2_4cvky")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1993509896]
 z_index = -1
-layout_mode = 0
-offset_right = 539.0
-offset_bottom = 955.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 10.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_m2ar2")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Rueda" type="Control" parent="." unique_id=2067789176]
 anchors_preset = 0
@@ -37,4 +43,5 @@ offset_bottom = 947.0
 script = ExtResource("3_4cvky")
 
 [node name="Line2D" type="Line2D" parent="Rueda" unique_id=1200031820]
+points = PackedVector2Array(111, -152)
 default_color = Color(0.05882353, 1, 1, 1)
