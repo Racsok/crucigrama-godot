@@ -9,11 +9,13 @@ corner_detail = 20
 
 [node name="Control_base" type="Control" unique_id=1938434882]
 layout_mode = 3
-anchors_preset = 0
-offset_left = -1.0
-offset_top = 4.0
-offset_right = 542.0
-offset_bottom = 969.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect_fondo" type="TextureRect" parent="." unique_id=1059947584]
 layout_mode = 1
@@ -22,9 +24,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 texture = ExtResource("1_x67dw")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="." unique_id=589295280]
