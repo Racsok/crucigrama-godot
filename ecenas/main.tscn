@@ -10,32 +10,29 @@ corner_detail = 20
 [node name="Control_base" type="Control" unique_id=1938434882]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 223.0
-offset_top = 184.0
-offset_right = 1163.0
-offset_bottom = 1855.0
+offset_left = -1.0
+offset_top = 4.0
+offset_right = 542.0
+offset_bottom = 969.0
 
 [node name="TextureRect_fondo" type="TextureRect" parent="." unique_id=1059947584]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -217.0
-offset_top = -176.0
-offset_right = -624.0
-offset_bottom = -890.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_x67dw")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="." unique_id=589295280]
 layout_mode = 0
-offset_left = -86.0
-offset_top = 502.0
-offset_right = 184.0
-offset_bottom = 598.0
+offset_left = 114.0
+offset_top = 669.0
+offset_right = 384.0
+offset_bottom = 765.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_4ie7b")
 text = "Jugar"
 script = ExtResource("2_4ie7b")
