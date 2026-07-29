@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://5cxufjt6n7fd" path="res://background1.png" id="2_m2ar2"]
 [ext_resource type="Script" uid="uid://x13ua3kvqsao" path="res://scripts/crucigramaCruzado/rueda.gd" id="3_4cvky"]
 [ext_resource type="Script" uid="uid://d1tqr64m82o8a" path="res://scripts/crucigramaCruzado/tablero_crucigrama.gd" id="3_m2ar2"]
+[ext_resource type="Script" uid="uid://duv456kmnmwqf" path="res://ecenas/atras.gd" id="3_sba5n"]
+[ext_resource type="PackedScene" uid="uid://bclhbjclom81g" path="res://ecenas/casilla.tscn" id="5_8a8xe"]
 
 [node name="Juego_crucigrama" type="Control" unique_id=1305111986 node_paths=PackedStringArray("tablero", "rueda")]
 layout_mode = 3
@@ -32,6 +34,18 @@ expand_mode = 1
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
+[node name="Atras" type="Button" parent="." unique_id=15486703]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+text = "Atras
+"
+script = ExtResource("3_sba5n")
+
 [node name="tablero_crucigrama" type="GridContainer" parent="." unique_id=1943645996]
 propagate_maximum_size = false
 layout_mode = 1
@@ -41,6 +55,7 @@ offset_bottom = 349.0
 grow_horizontal = 2
 columns = 8
 script = ExtResource("3_m2ar2")
+casilla_scene = ExtResource("5_8a8xe")
 
 [node name="Rueda" type="Control" parent="." unique_id=2067789176]
 anchors_preset = 0
@@ -53,3 +68,5 @@ script = ExtResource("3_4cvky")
 [node name="Line2D" type="Line2D" parent="Rueda" unique_id=1200031820]
 points = PackedVector2Array(111, -152)
 default_color = Color(0.05882353, 1, 1, 1)
+
+[connection signal="pressed" from="Atras" to="Atras" method="_on_pressed"]

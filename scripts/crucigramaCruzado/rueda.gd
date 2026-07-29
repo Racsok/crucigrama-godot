@@ -20,9 +20,17 @@ func _ready():
 		
 
 func configurar_rueda(palabra_semilla: String):
-	# Limpiar botones anteriores
-	for b in botones_letras:
-		b.queue_free()
+	# 1. Limpiar el trazo de la línea si había quedado dibujado
+	if linea_trazo:
+		linea_trazo.clear_points()
+	
+	# 2. Eliminar TODOS los nodos Button que sean hijos directos de la Rueda
+	# (Esto borra tanto los creados por código como los del editor)
+	for child in get_children():
+		if child is Button:
+			child.queue_free()
+			
+	# 3. Limpiar los arreglos
 	botones_letras.clear()
 	letras_seleccionadas.clear()
 	
@@ -32,23 +40,16 @@ func configurar_rueda(palabra_semilla: String):
 	caracteres.shuffle()
 	
 	var total_letras = caracteres.size()
-	if total_letras == 0: return
+	if total_letras == 0: 
+		return
 	
 	var paso_angulo = (2 * PI) / total_letras
 	
-	# =========================================================================
-	# CENTRADO CORRECTO RELATIVO AL NODO PARE
-	# =========================================================================
-	# Si el nodo Rueda en el editor está estirado a Full Rect (0,0,540,960):
-	# Usamos size del contenedor. Si Rueda es un nodo pequeño posicionado abajo,
-	# 'size / 2.0' ubicará las letras centradas exactamente dentro del nodo Rueda.
+	# Centrado dinámico según el tamaño del contenedor
 	var centro_rueda: Vector2
-	
 	if size.y > 500: 
-		# Caso A: El nodo Rueda ocupa toda la pantalla -> Ponemos la rueda al 75% de su alto
 		centro_rueda = Vector2(size.x / 2.0, size.y * 0.75)
 	else:
-		# Caso B: El nodo Rueda es una caja pequeña ubicada en la parte inferior del nivel
 		centro_rueda = size / 2.0
 
 	for i in range(total_letras):
@@ -59,20 +60,19 @@ func configurar_rueda(palabra_semilla: String):
 		var pos_relativa = Vector2(offset_x, offset_y)
 		var pos_final = centro_rueda + pos_relativa
 		
-		# 1. Crear instancia en RAM
+		# Crear el botón
 		var boton = Button.new()
 		boton.text = caracteres[i]
 		boton.mouse_filter = Control.MOUSE_FILTER_IGNORE 
 		boton.custom_minimum_size = Vector2(50, 50)
 		
-		# 2. Configurar posición local respecto al padre
 		boton.position = pos_final - (boton.custom_minimum_size / 2.0)
 		
-		# Guardar metadatos para trazado de líneas
+		# Guardar metadatos para trazado
 		boton.set_meta("letra", caracteres[i])
 		boton.set_meta("centro", pos_final)
 		
-		# 3. Agregar al árbol de escenas (Godot lo pintará en el siguiente frame)
+		# Agregar al árbol de escenas
 		add_child(boton)
 		botones_letras.append(boton)
 

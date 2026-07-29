@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bclhbjclom81g"]
+
+[ext_resource type="Script" uid="uid://bskidllo1rnld" path="res://scripts/crucigramaCruzado/casilla.gd" id="1_g3tuk"]
+[ext_resource type="Texture2D" uid="uid://vg5i760x30ck" path="res://assets/texturas/crate_psx.png" id="2_sggwo"]
+
+[node name="Casilla" type="Control" unique_id=816023724]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g3tuk")
+metadata/_edit_use_anchors_ = true
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=81194540]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sggwo")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=1428112803]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1900140686]
