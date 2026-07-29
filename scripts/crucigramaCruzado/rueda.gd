@@ -18,7 +18,6 @@ func _ready():
 		linea_trazo.width = 12.0
 		linea_trazo.default_color = Color("ffcc00")
 		
-	configurar_rueda("ARMADURA")
 
 func configurar_rueda(palabra_semilla: String):
 	# Limpiar botones anteriores

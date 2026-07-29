@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://dmxeebfi3yfk0"]
 
-[ext_resource type="Script" uid="uid://p6fw5jppuuro" path="res://scripts/generar_crucigrama.gd" id="2_4cvky"]
+[ext_resource type="Script" uid="uid://1xak1skl2le7" path="res://scripts/crucigramaCruzado/juego_crucigrama.gd" id="1_4cvky"]
 [ext_resource type="Texture2D" uid="uid://5cxufjt6n7fd" path="res://background1.png" id="2_m2ar2"]
-[ext_resource type="Script" uid="uid://x13ua3kvqsao" path="res://scripts/letras.gd" id="3_4cvky"]
+[ext_resource type="Script" uid="uid://x13ua3kvqsao" path="res://scripts/crucigramaCruzado/rueda.gd" id="3_4cvky"]
+[ext_resource type="Script" uid="uid://d1tqr64m82o8a" path="res://scripts/crucigramaCruzado/tablero_crucigrama.gd" id="3_m2ar2"]
 
-[node name="Control" type="Control" unique_id=1305111986]
+[node name="Juego_crucigrama" type="Control" unique_id=1305111986 node_paths=PackedStringArray("tablero", "rueda")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,19 +13,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+script = ExtResource("1_4cvky")
+tablero = NodePath("tablero_crucigrama")
+rueda = NodePath("Rueda")
 metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="." unique_id=1943645996]
-propagate_maximum_size = false
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 349.0
-grow_horizontal = 2
-columns = 8
-script = ExtResource("2_4cvky")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1993509896]
+[node name="Fondo" type="TextureRect" parent="." unique_id=1993509896]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -37,6 +31,16 @@ texture = ExtResource("2_m2ar2")
 expand_mode = 1
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
+
+[node name="tablero_crucigrama" type="GridContainer" parent="." unique_id=1943645996]
+propagate_maximum_size = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 349.0
+grow_horizontal = 2
+columns = 8
+script = ExtResource("3_m2ar2")
 
 [node name="Rueda" type="Control" parent="." unique_id=2067789176]
 anchors_preset = 0

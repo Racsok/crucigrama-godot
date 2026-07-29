@@ -27,3 +27,4 @@ jobs:
         with:
           name: Juego-Compilado-APK
           path: /home/runner/.local/share/godot/builds/**
+          retention-days: 1 # <- Esta línea le indica a GitHub que lo borre en 24 horas

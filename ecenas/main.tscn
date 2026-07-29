@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqvgjxk35ftqq"]
 
 [ext_resource type="Texture2D" uid="uid://5cxufjt6n7fd" path="res://background1.png" id="1_x67dw"]
-[ext_resource type="Script" uid="uid://bby5apemdkglq" path="res://ecenas/buttonPlay.gd" id="2_4ie7b"]
+[ext_resource type="Script" uid="uid://bby5apemdkglq" path="res://scripts/inicio/buttonPlay.gd" id="2_4ie7b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ie7b"]
 bg_color = Color(0.699923, 0.5766724, 0.4284971, 1)
@@ -17,7 +17,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect_fondo" type="TextureRect" parent="." unique_id=1059947584]
+[node name="fondo" type="TextureRect" parent="." unique_id=1059947584]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,14 +30,42 @@ expand_mode = 1
 stretch_mode = 6
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="." unique_id=589295280]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 669.0
-offset_right = 384.0
-offset_bottom = 765.0
+[node name="opciones_menu" type="Button" parent="." unique_id=991789384]
+layout_mode = 1
+offset_right = 270.0
+offset_bottom = 96.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_4ie7b")
-text = "Jugar"
+text = "opciones
+
+"
+
+[node name="play_crucigrama_normal" type="Button" parent="." unique_id=1568308658]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 100.0
+offset_right = 142.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ie7b")
+text = "Crucigrama normal"
+
+[node name="play_crucigrama_cruzado" type="Button" parent="." unique_id=589295280]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 394.0
+offset_right = 407.0
+offset_bottom = 490.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4ie7b")
+text = "Crucigrama cruzado
+"
 script = ExtResource("2_4ie7b")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="opciones_menu" to="opciones_menu" method="_on_pressed"]
+[connection signal="pressed" from="play_crucigrama_normal" to="play_crucigrama_normal" method="_on_pressed"]
+[connection signal="pressed" from="play_crucigrama_cruzado" to="play_crucigrama_cruzado" method="_on_pressed"]
